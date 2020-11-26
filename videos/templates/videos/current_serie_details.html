@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+{% for episode in episodes %}
+    <div class="col-12 col-md-6 col-lg-4 mt-4">
+        <h2 class="text-light text-center">{{ forloop.counter }} - {{episode.friendly_name}}</h2>
+        <iframe class="w-100" height="315" src="{{episode.video_url}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p class="text-light text-center">{{episode.description}}</p>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

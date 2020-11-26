@@ -4,4 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.all_videos, name="videos"),
+    path('<serie_id>/', views.current_serie_details,
+         name="current_serie_details"),
 ]

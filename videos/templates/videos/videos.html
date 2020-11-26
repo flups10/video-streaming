@@ -4,10 +4,12 @@
 <div class="row">
     {% for serie in series %}
         <div class="col-12 col-md-6 col-lg-4 text-light">
-            <img class="w-100 pr-4" src="{{ serie.image_url }}" alt="">
-            <h3 class="">
-                {{ serie.friendly_name }}
-            </h3>
+            <a href="{% url 'current_serie_details' serie.id %}">
+                <img class="w-100 pr-4 h-auto my-auto" src="{{ serie.image_url }}" alt="">
+                <h3 class="">
+                    {{ serie.friendly_name }}
+                </h3>
+            </a>
             <div class="row">
                 <p class="col-3">
                     Genre
