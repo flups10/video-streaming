@@ -1,0 +1,21 @@
+.background-landingpage{
+
+    background: url(https://images.pexels.com/photos/3853993/pexels-photo-3853993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) no-repeat bottom right fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #5dbb08;
+    font-weight: bolder;
+
+    position: relative;
+}
+
+body{
+    background-color: red
+}

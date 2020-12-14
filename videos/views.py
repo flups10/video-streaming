@@ -16,7 +16,7 @@ def all_videos(request):
             query = request.GET['q']
             if not query:
                 #messages.error(request, "You didn't enter any search criteria")
-                return redirect(reverse('all_videos'))
+                return redirect(reverse('videos'))
 
             queries = Q(friendly_name__icontains=query) | Q(description__icontains=query) | Q(genre__icontains=query)
             series = Serie.objects.filter(queries)

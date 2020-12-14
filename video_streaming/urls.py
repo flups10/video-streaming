@@ -21,4 +21,5 @@ urlpatterns = [
     path('account/', include('allauth.urls')),
     path('', include('home.urls')),
     path('all_videos/', include('videos.urls')),
+    path('premium/', include('premium.urls')),
 ]

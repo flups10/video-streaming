@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content%}
-    <div class="container bg-dark">
+
+    <div class="container background-landingpage">
         <div class="row bg-dark">  
             <div class="col-12 text-center">
                 <h1 class="display-4 lead text-light bg-dark mx-auto">Start Watching Now!</h1>
             </div>
         </div>
-    </div>
+    
     <div class="row">
         <div class="col-12 pt-4 text-center">
         <a class="" href="{% url 'videos' %}">
@@ -37,5 +38,6 @@
         <div class="col-12 col-md-6 col-lg-4">
             <iframe class="w-100 m1" height="315" src="https://www.youtube.com/embed/xYYFtYeiuCY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+    </div>
     </div>
 {% endblock %}
