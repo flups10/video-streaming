@@ -8,7 +8,7 @@ from .models import Serie, Episode
 def all_videos(request):
 
     series = Serie.objects.all()
-    
+
     query = None
 
     if request.GET:
