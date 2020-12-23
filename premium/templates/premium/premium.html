@@ -2,78 +2,18 @@
 {% block content %}
 <div class="container">
     <div class="row">
+        {% for subscription in premium %}
         <div class="col-12 col-lg-6">
-            {% for subscription in premium %}
-            {% endfor %}
-
             <div class="container">
-                <h3 class="text-center">Free accounts</h3>
-                <div class="row">
-                    <table>
-                        <tr>
-                            <th class="col-6">
-                                Ammount of Series
-                            </th>
-                            <td class="w-100 col-6 ">
-                                3
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="col-6">
-                                Episodes per Serie
-                            </th>
-                            <td class="w-100 col-6 ">
-                                2
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="col-6">
-                                Ammount of Cliffhangers
-                            </th>
-                            <td class="w-100 col-6 ">
-                                9000
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                <h3 class="text-center capitalize">{{subscription.name}} accounts</h3>
+                <p>price</p>
+                <p>{{subscription.price}}</p>
             </div> 
         </div>
-        <div class="col-12 col-lg-6">
-            <div class="container">
-                <h3 class="text-center">Premium accounts</h3>
-                <div class="row">
-                    <table>
-                        <tr>
-                            <th class="col-6">
-                                Ammount of Series
-                            </th>
-                            <td class="w-100 col-6 ">
-                                All of them
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="col-6">
-                                Episodes per Serie
-                            </th>
-                            <td class="col-6 ">
-                                All of them
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="col-6">
-                                Ammount of Cliffhangers
-                            </th>
-                            <td class="w-100 col-6 ">
-                                0
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+        {% endfor %}
                 <a href="{% url 'checkout' %}">
-                <div class="btn">Buy Premium!</div>
+                    <div class="btn">Buy Premium!</div>
                 </a>
-            </div> 
-        </div>
-    </div>
+    </div> 
 </div>
 {% endblock %}

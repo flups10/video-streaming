@@ -1,4 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <h2>Checkout</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form>
+                {% csrf_token %}
+                {{ form.full_name | as_crispy_field }}
+                {{ form.email | as_crispy_field }}
+                {{ form.country | as_crispy_field }}
+                <div id="card_element">
+
+                </div>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    {{ stripe_public_key | json_script:"id_stripe_public_key" }}
+    {{ id_client_secret | json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
