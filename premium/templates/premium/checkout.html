@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h2>Checkout</h2>
 <div class="container">
     <div class="row">
         <div class="col-12">
+            <h2>Checkout</h2>
             <form id="payment-form" method="POST">
                 {% csrf_token %}
                 {{ form.full_name | as_crispy_field }}

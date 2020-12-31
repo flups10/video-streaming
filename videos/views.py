@@ -9,21 +9,6 @@ import datetime
 
 
 def all_videos(request):
-    # check if user is premium
-    try:
-        current_user_subscription = user_subscription.objects.filter(
-                                        user=request.user).values('premium_until')
-        premium_date = current_user_subscription[0]['premium_until']
-        now = datetime.date.today()
-
-        if premium_date > now:
-            premium = True
-        else:
-            premium = False
-
-    except:
-        premium = False
-
 
     series = Serie.objects.all()
 
@@ -42,22 +27,36 @@ def all_videos(request):
     context = {
         'series': series,
         'search_term': query,
-        'premium': premium,
     }
 
     return render(request, 'videos/videos.html', context)
 
-'''
-def current_serie_details(request, serie_id):
 
+def current_episode_details(request, serie_id, episode_id):
+
+    try:
+        current_user_subscription = user_subscription.objects.filter(
+                                        user=request.user).values('premium_until')
+        premium_date = current_user_subscription[0]['premium_until']
+        now = datetime.date.today()
+
+        if premium_date > now:
+            premium = True
+        else:
+            premium = False
+
+    except:
+        premium = False
+    current_episode = Episode.objects.filter(id=episode_id)
     episodes = Episode.objects.filter(series__id=serie_id)
 
     context = {
         'episodes': episodes,
+        'current_episode': current_episode,
+        'premium': premium
     }
 
-    return render(request, 'videos/current_serie_details.html', context)
-'''
+    return render(request, 'videos/current_episode_details.html', context)
 
 
 def current_serie_details(request, serie_id):
@@ -76,10 +75,27 @@ def current_serie_details(request, serie_id):
 
         SerieComments.objects.create(**comment)
 
+    try:
+        current_user_subscription = user_subscription.objects.filter(
+                                        user=request.user).values('premium_until')
+        premium_date = current_user_subscription[0]['premium_until']
+        now = datetime.date.today()
+
+        if premium_date > now:
+            premium = True
+        else:
+            premium = False
+
+    except:
+        premium = False
+
+    serie_id = Serie.objects.filter(id=serie_id).values('id')
     context = {
         'episodes': episodes,
         'comments': comments,
-        'current_serie': current_serie
+        'current_serie': current_serie,
+        'serie_id': serie_id,
+        'premium': premium
     }
 
     return render(request, 'videos/current_serie_details.html', context)

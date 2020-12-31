@@ -7,4 +7,5 @@ urlpatterns = [
     path('<serie_id>/', views.current_serie_details,
          name="current_serie_details"),
     path('<comment_id>', views.delete_comment, name="delete_comment"),
+    path('<serie_id>/<episode_id>/', views.current_episode_details, name="current_episode_details"),
 ]

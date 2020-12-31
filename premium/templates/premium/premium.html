@@ -2,18 +2,94 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        {% for subscription in premium %}
         <div class="col-12 col-lg-6">
-            <div class="container">
-                <h3 class="text-center capitalize">{{subscription.name}} accounts</h3>
-                <p>price</p>
-                <p>{{subscription.price}}</p>
+            
+                <table class="border border-solid p-4">
+                    <tr>    
+                        <th>
+                            Premium accounts
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Price
+                        </th>
+                        <td>
+                            {{price}}ct /month
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Episodes
+                        </th>
+                        <td>
+                            <strong>All</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Series
+                        </th>
+                        <td>
+                            All
+                        </td>
+                    </tr>
+                </table>
+            
+        </div>
+            <div class="col-12 col-lg-6">
+                
+                    <table class="border">
+                        <tr>    
+                            <th>
+                                Free accounts
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Price
+                            </th>
+                            <td>
+                                Free
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Episodes
+                            </th>
+                            <td>
+                                <strong>2 per Serie</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                        <th>
+                            Series
+                        </th>
+                        <td>
+                            All
+                        </td>
+                    </tr>
+                </table>
+                
             </div> 
         </div>
-        {% endfor %}
+        <div class="row">
+            <div class="col-12">
+                {% if user.is_authenticated %}
                 <a href="{% url 'checkout' %}">
                     <div class="btn">Buy Premium!</div>
                 </a>
+                {% else %}
+                <div>
+                    <p>
+                        <i>
+                            You need to make an account to buy Premium
+                        </i>
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div> 
 </div>
 {% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+        {% for episode in current_episode %}
+        <div class="col-12">
+            <h2 class="text-center">{{episode.friendly_name}}</h2>
+            <div class="ratio ratio-16x9">
+                <iframe class="w-100 h-auto" src="{{episode.video_url}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p class="text-center">{{episode.description}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% for serie in serie_id %}
+    {% for episode in episodes %}
+        <div class="col-lg-2 col-s-12 bg-color-warning">
+                <a class="btn" href="{% url 'current_episode_details' serie.id episode.id %}">
+                    <p class="">{{ forloop.counter }} - {{episode.friendly_name}} </p>
+                    
+                </a>
+                
+            </div>
+    {% endfor %}
+    {% endfor %}
+    <!--
+        {% for comment in comments%}
+        <div row>
+            <div class="col-12">
+                <p>
+                    {{comment.comment}}
+                </p>
+                <a href="{% url 'delete_comment' comment.id %}">
+                    <i class="fas fa-trash" ></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    -->
+    {% if user.is_authenticated %}
+    <div class="row">
+        <div class="col-12">
+            <form method="POST">
+                {% csrf_token %}
+                <input name="new_comment" id="new_comment" type="text">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    {% endif %}
+    </div>
+{% endblock %}

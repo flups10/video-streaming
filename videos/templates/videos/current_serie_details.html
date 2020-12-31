@@ -1,36 +1,79 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row">
-{{serie.name}}
-{% for episode in episodes %}
-    <div class="col-12 col-md-6 col-lg-4 mt-4">
-        <h2 class="text-light text-center">{{ forloop.counter }} - {{episode.friendly_name}}</h2>
-        <iframe class="w-100" height="315" src="{{episode.video_url}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p class="text-light text-center">{{episode.description}}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            {% for current_series in current_serie %}
+            <h2 class="w-100 mt-4 mb-4"> 
+                {{ current_series.friendly_name }}
+            </h2>
+            <img class="w-50 h-auto" src="{{ current_series.image_url }}" alt="">
+            <h3 class="mt-3 mb-3">Description</h3>
+            <p class="">{{ current_series.description}}</p>
+            <hr>
+            {% endfor %}
+        </div>
+            <h3 class="col-12">Episodes</h3>
+            {% for episode in episodes %}
+            <div class="col-lg-3 col-s-12 bg-color-warning">
+                {% if forloop.counter > 2 %}
+                    {% if premium == True %}
+                        {% for serie in serie_id %}
+                        <a class="btn" href="{% url 'current_episode_details' serie.id episode.id %}">
+                            <p class="">{{ forloop.parentloop.counter }} - {{episode.friendly_name}}</p>
+                        </a>
+                        {% endfor %}
+                    {% else %}
+                    <p><i class="fas fa-lock">You need premium for this content</i></p>
+                    {% endif %}
+                {% else %}
+                    {% for serie in serie_id %}
+                        <a class="btn" href="{% url 'current_episode_details' serie.id episode.id %}">
+                            <p class="">{{ forloop.parentloop.counter }} - {{episode.friendly_name}}</p>
+                        </a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
     </div>
-{% endfor %}
-</div>
-{% for comment in comments%}
-<div row>
-    <div class="col-12">
-        <p>
-            {{comment.comment}}
-        </p>
-        <a href="{% url 'delete_comment' comment.id %}">
-            <i class="fas fa-trash" ></i>
-        </a>
+    <div class="row">
+        <div class="col-12">
+            <h3 class="mb-3 mt-3">Comments</h3>
+            {% if comments %}
+                {% for comment in comments%}
+                <div class="row">
+                    <div class="col-12 border">
+                        <p><strong>{{comment.name}}</strong></p>
+                        <p>
+                            {{ comment.comment }}
+                        <a class="right" href="{% url 'delete_comment' comment.id %}">
+                            <i class="fas fa-trash" ></i>
+                        </a>
+                        </p>
+                    </div>
+                    <hr>
+                </div>
+                {% endfor %}
+            {% else %}
+            <p><i>No comments yet</i></p>
+            {% endif %}
+        </div>
     </div>
-</div>
-{% endfor %}
-<div class="row">
-    <div class="col-12">
+    <div class="row">
+        <div class="col-12">
+            {% if user.is_authenticated %}
+        <h4>Write your own comment here!</h4>
         <form method="POST">
             {% csrf_token %}
+            
             <input name="new_comment" id="new_comment" type="text">
             <input type="submit" value="Submit">
+            {% else %}
+            <p><i>Register and/or log in to place a comment</i></p>
+            {% endif %}
         </form>
     </div>
 </div>
-
+</div>
 {% endblock %}

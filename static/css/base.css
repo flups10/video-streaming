@@ -1,21 +1,17 @@
-.background-landingpage{
-
-    background: url(https://images.pexels.com/photos/3853993/pexels-photo-3853993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) no-repeat bottom right fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #5dbb08;
-    font-weight: bolder;
-
-    position: relative;
+a{
+    text-decoration: none;
 }
 
-body{
-    background-color: red
+.row{
+    margin: 0px;
+    padding: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.bg-color-black{
+    background-color:#000511;
+}
+.bg-color-blackish{
+    background-color: #070d19;
 }

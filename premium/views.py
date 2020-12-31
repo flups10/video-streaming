@@ -11,13 +11,11 @@ endpoint_secret = settings.STRIPE_WH_SECRET
 
 def premium_offers(request):
 
-    model = 'premium'
-
+    stripe_total = settings.STRIPE_TOTAL
     context = {
-        'premium': model
+        'price': stripe_total,
     }
 
-    print(context)
     return render(request, 'premium/premium.html', context)
 
 
@@ -26,7 +24,7 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     form = CheckoutForm
-    stripe_total = 999
+    stripe_total = settings.STRIPE_TOTAL
     stripe.api_key = stripe_secret_key
 
     intent = stripe.PaymentIntent.create(
