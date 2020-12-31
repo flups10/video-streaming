@@ -44,13 +44,18 @@
                 {% for comment in comments%}
                 <div class="row">
                     <div class="col-12 border">
+                        {% for serie in serie_id %}
                         <p><strong>{{comment.name}}</strong></p>
                         <p>
                             {{ comment.comment }}
+                        </p>
                         <a class="right" href="{% url 'delete_comment' comment.id %}">
                             <i class="fas fa-trash" ></i>
                         </a>
-                        </p>
+                        <a href="{% url 'edit_comment' serie.id comment.id %}">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                        {% endfor %}
                     </div>
                     <hr>
                 </div>

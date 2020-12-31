@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-4">
+        <h2>Edit Comment</h2>
+            <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12 justify-content-between w-100">
+                    <textarea id="new_comment" name="new_comment" class="form-control mr-sm-2 w-50" data-length="2000">{{ comments }}</textarea>
+                </div>
+            </div>
+            <button class="btn" type="submit" name="action">Submit</button>
+        </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

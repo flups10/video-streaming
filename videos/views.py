@@ -107,3 +107,22 @@ def delete_comment(request, comment_id):
     SerieComments.objects.filter(id=comment_id).delete()
 
     return (redirect(current_serie_details, serie_id))
+
+
+def edit_comment(request, comment_id, serie_id):
+    serie = SerieComments.objects.filter(id=comment_id).values('Serie','comment')
+    serie_id = serie[0]['Serie']
+    comments = serie[0]['comment']
+    if request.method == 'POST':
+        updated_comment = request.POST.get("new_comment")
+        current_comment = SerieComments.objects.get(id=comment_id)
+        current_comment.comment = updated_comment
+        current_comment.save()
+
+        return (redirect(current_serie_details, serie_id))
+    context = {
+        'comments': comments
+    }
+
+    print(comments)
+    return render(request, 'videos/edit_comment.html', context)
