@@ -50,6 +50,10 @@ as a user,:
 
  ### Testing
     I tested if an Anonymous User can create a subscription
+    If an Anonymous User can comment
+    If a user can do CRUD operations on comments
+    If premium unlocks premium items
+    if a payment from a user who is premium already gets extended instead of 30 day reset
 
 
  ## Deployment
@@ -66,6 +70,7 @@ as a user,:
 forms.py in my premium app is from ckz8780
 allauth/accounts/base.html is from ckz8780
 stripe_elemnts.js is from ckz8780
+
 
  ### Media
  All 3 pictures on this website were taken from duckduck go searches for their artist names
