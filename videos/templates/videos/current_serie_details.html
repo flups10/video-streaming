@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="row">
+{{serie.name}}
 {% for episode in episodes %}
     <div class="col-12 col-md-6 col-lg-4 mt-4">
         <h2 class="text-light text-center">{{ forloop.counter }} - {{episode.friendly_name}}</h2>
@@ -10,4 +11,26 @@
     </div>
 {% endfor %}
 </div>
+{% for comment in comments%}
+<div row>
+    <div class="col-12">
+        <p>
+            {{comment.comment}}
+        </p>
+        <a href="{% url 'delete_comment' comment.id %}">
+            <i class="fas fa-trash" ></i>
+        </a>
+    </div>
+</div>
+{% endfor %}
+<div class="row">
+    <div class="col-12">
+        <form method="POST">
+            {% csrf_token %}
+            <input name="new_comment" id="new_comment" type="text">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
 {% endblock %}

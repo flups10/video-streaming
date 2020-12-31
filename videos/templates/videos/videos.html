@@ -29,4 +29,13 @@
         </div>
     {% endfor %}
 </div>
+<div class="row">
+    <div class="col-12">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Premium, user_subscription
+from .models import user_subscription
 
 # Register your models here.
-admin.site.register(Premium)
 admin.site.register(user_subscription)

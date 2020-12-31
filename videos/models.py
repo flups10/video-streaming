@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -28,3 +29,11 @@ class Episode(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SerieComments(models.Model):
+    name = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    Serie = models.ForeignKey('Serie', null=True, blank=True, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=1024, null=False, blank=False)
+    date = models.DateTimeField(auto_now_add=True)
+    

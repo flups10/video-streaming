@@ -1,11 +1,29 @@
 from django.shortcuts import render, reverse, redirect
 from django.db.models import Q
-from .models import Serie, Episode
+from .models import Serie, Episode, SerieComments
+from premium.models import user_subscription
+from django.contrib.auth.models import User
+import datetime
 
 # Create your views here.
 
 
 def all_videos(request):
+    # check if user is premium
+    try:
+        current_user_subscription = user_subscription.objects.filter(
+                                        user=request.user).values('premium_until')
+        premium_date = current_user_subscription[0]['premium_until']
+        now = datetime.date.today()
+
+        if premium_date > now:
+            premium = True
+        else:
+            premium = False
+
+    except:
+        premium = False
+
 
     series = Serie.objects.all()
 
@@ -21,23 +39,55 @@ def all_videos(request):
             queries = Q(friendly_name__icontains=query) | Q(description__icontains=query) | Q(genre__icontains=query)
             series = Serie.objects.filter(queries)
 
-
     context = {
         'series': series,
         'search_term': query,
+        'premium': premium,
     }
-
-    print(context)
 
     return render(request, 'videos/videos.html', context)
 
-
+'''
 def current_serie_details(request, serie_id):
 
-    episodes = Episode.objects.filter(series__id=serie_id) 
+    episodes = Episode.objects.filter(series__id=serie_id)
 
     context = {
         'episodes': episodes,
     }
 
     return render(request, 'videos/current_serie_details.html', context)
+'''
+
+
+def current_serie_details(request, serie_id):
+
+    episodes = Episode.objects.filter(series__id=serie_id)
+    current_serie = Serie.objects.filter(id=serie_id)
+    comments = SerieComments.objects.filter(Serie__id=serie_id)
+    if request.method == 'POST':
+        now = datetime.datetime.now()
+        comment = {
+            'comment': request.POST.get("new_comment"),
+            'name': request.user,
+            'Serie': Serie.objects.get(id=serie_id),
+            'date': now
+        }
+
+        SerieComments.objects.create(**comment)
+
+    context = {
+        'episodes': episodes,
+        'comments': comments,
+        'current_serie': current_serie
+    }
+
+    return render(request, 'videos/current_serie_details.html', context)
+
+
+def delete_comment(request, comment_id):
+    serie = SerieComments.objects.filter(id=comment_id).values('Serie')
+    serie_id = serie[0]['Serie']
+    SerieComments.objects.filter(id=comment_id).delete()
+
+    return (redirect(current_serie_details, serie_id))
