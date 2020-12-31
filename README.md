@@ -14,3 +14,60 @@ as a user,:
  - I want to be able to register with clear instructions
  - I don't want distraction of any kind while watching movies
  - I want to be able to buy subscriptions secure
+
+ ## Features
+ - Premium, Allows users to buy subscription
+ - Register, Allows user to register to the website
+ - Videos, Click on an Episode, and enjoy watching
+ - Searchbar, Search for anyvideo you want, you can search for name description and genre
+ - Add comments to Series, I did not use comments on episodes since they usually spoil the Episode
+ - Remove comments form series
+ - Edit comments from series
+ - Read comments form series
+ 
+ ### Features left to implement
+ - Recurring payments, I spent alot of time trying to make this work with no succes
+
+ ## Technologies Used
+    arrow==0.17.0
+    asgiref==3.3.1
+    blessed==1.17.11
+    Django==3.1.3
+    django-allauth==0.43.0
+    django-crispy-forms==1.10.0
+    django-picklefield==3.0.1
+    django-q==1.3.4
+    heroku==0.1.4
+    oauthlib==3.1.0
+    Pillow==8.0.1
+    PyJWT==1.7.1
+    python-dateutil==1.5
+    python3-openid==3.2.0
+    pytz==2020.4
+    requests-oauthlib==1.3.0
+    sqlparse==0.4.1
+    stripe==2.55.1
+
+ ### Testing
+    I tested if an Anonymous User can create a subscription
+
+
+ ## Deployment
+
+*-*
+
+ ## Credits
+
+    All Code institute personal which helped me during my project,
+    Sorry I dont remmeber all your names :\
+    My mentor for always being ready to help me out when im asking( i need to learn to start asking more...)
+
+ ### Content
+forms.py in my premium app is from ckz8780
+allauth/accounts/base.html is from ckz8780
+stripe_elemnts.js is from ckz8780
+
+ ### Media
+ All 3 pictures on this website were taken from duckduck go searches for their artist names
+
+ All Videos are taken from youtube from the official arist pages
