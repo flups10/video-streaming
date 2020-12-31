@@ -1,1 +1,1 @@
-web: python manage.py runserver
+web: gunicorn video_streaming.wsgi:application
